@@ -79,3 +79,9 @@ const renderMovie = (movie) => {
 };
 
 document.addEventListener("DOMContentLoaded", autorun);
+
+//the code for the navbar and the footer
+function search() {
+  var searchTerm = document.getElementById('search-box').value;
+  // Perform search logic and display results
+}
