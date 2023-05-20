@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const PROFILE_BASE_URL = "http://image.tmdb.org/t/p/w185";
@@ -13,9 +13,8 @@ const autorun = async () => {
 
 // Don't touch this function please
 const constructUrl = (path) => {
-  return `${TMDB_BASE_URL}/${path}?api_key=${atob(
-    "NTQyMDAzOTE4NzY5ZGY1MDA4M2ExM2M0MTViYmM2MDI="
-  )}`;
+  return `${TMDB_BASE_URL}/${path}/?api_key=36f366620ade5c54e351a12a48a38a81
+ `;
 };
 
 // You may need to add to this function, definitely don't delete it.
@@ -40,6 +39,35 @@ const fetchMovie = async (movieId) => {
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
+  const firstMovie = movies[0];
+  console.log(firstMovie);
+  movies.shift(); //first movie is removed as it's used for hero part
+  movies.splice(1, 1); // horror movie removed as it's scary
+  console.log(movies);
+  const homePage = document.createElement("div");
+  homePage.innerHTML = `
+  <div id="hero" class="bg-no-repeat w-full" style="background-image: url(${
+    BACKDROP_BASE_URL + `/` + firstMovie.backdrop_path
+  });">
+    <h1 class="text-2xl h-96" >${firstMovie.original_title}</h1>
+    <p>${firstMovie.overview}</p>
+  </div>
+  <div id="gridmovies">
+    ${movies.map(
+      (item) => `
+      <div>
+        <img src="${BACKDROP_BASE_URL + `/` + item.poster_path}" />
+      </div>`
+    )}
+  </div>`;
+
+  homePage.addEventListener("click", () => {
+    movieDetails(movie);
+  });
+
+  CONTAINER.appendChild(homePage);
+
+  /* -- initial code --
   movies.map((movie) => {
     const movieDiv = document.createElement("div");
     movieDiv.innerHTML = `
@@ -52,6 +80,7 @@ const renderMovies = (movies) => {
     });
     CONTAINER.appendChild(movieDiv);
   });
+  */
 };
 
 // You'll need to play with this function in order to add features and enhance the style.

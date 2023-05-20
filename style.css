@@ -6,8 +6,13 @@
   width: 100%;
 }
 
+body {
+  background-color: rgb(92, 88, 88);
+}
+
 .container {
   padding-top: 32px;
+  background-color: rgb(92, 88, 88);
 }
 
 #actors {
