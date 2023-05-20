@@ -46,17 +46,19 @@ const renderMovies = (movies) => {
   console.log(movies);
   const homePage = document.createElement("div");
   homePage.innerHTML = `
-  <div id="hero" class="bg-no-repeat w-full" style="background-image: url(${
+  <div id="hero" class="bg-no-repeat bg-cover" style="background-image: url(${
     BACKDROP_BASE_URL + `/` + firstMovie.backdrop_path
   });">
     <h1 class="text-2xl h-96" >${firstMovie.original_title}</h1>
     <p>${firstMovie.overview}</p>
   </div>
-  <div id="gridmovies">
+  <div id="gridmovies class="grid grid-flow-row">
     ${movies.map(
       (item) => `
-      <div>
-        <img src="${BACKDROP_BASE_URL + `/` + item.poster_path}" />
+      <div class="w-72">
+        <img class="rounded-lg" src="${
+          BACKDROP_BASE_URL + `/` + item.poster_path
+        }" />
       </div>`
     )}
   </div>`;
