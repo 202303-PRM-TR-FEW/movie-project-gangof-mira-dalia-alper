@@ -46,22 +46,30 @@ const renderMovies = (movies) => {
   console.log(movies);
   const homePage = document.createElement("div");
   homePage.innerHTML = `
-  <div id="hero" class="bg-no-repeat bg-cover" style="background-image: url(${
-    BACKDROP_BASE_URL + `/` + firstMovie.backdrop_path
-  });">
-    <h1 class="text-2xl h-96" >${firstMovie.original_title}</h1>
-    <p>${firstMovie.overview}</p>
+  <div id="hero" class="w-full h-[550px] text-white">
+    <div class="w-full h-full">
+      <div class="absolute w-full h-[550px] bg-gradient-to-r from-gray-700"></div>
+      <img class="w-full h-full object-cover" src="${
+        BACKDROP_BASE_URL + `/` + firstMovie.backdrop_path
+      }" />
+
+      <div class="absolute max-w-xl  top-[20%] pl-6 p-4">
+        <h1 class="text-2xl text-white">${firstMovie.original_title}</h1>
+        <p class="py-8">${firstMovie.overview}</p>
+      </div>
+    </div>
   </div>
-  <div id="gridmovies class="grid grid-flow-row">
-    ${movies.map(
-      (item) => `
-      <div class="w-72">
-        <img class="rounded-lg" src="${
-          BACKDROP_BASE_URL + `/` + item.poster_path
-        }" />
-      </div>`
-    )}
-  </div>`;
+    <div id="gridmovies" class="grid grid-cols-3">
+      ${movies.map(
+        (item) => `
+        <div class="w-72">
+          <img class="rounded-lg" src="${
+            BACKDROP_BASE_URL + `/` + item.poster_path
+          }" />
+        </div>`
+      )}
+    </div>
+  `;
 
   homePage.addEventListener("click", () => {
     movieDetails(movie);
