@@ -42,34 +42,43 @@ const renderMovies = (movies) => {
   const firstMovie = movies[0];
   console.log(firstMovie);
   movies.shift(); //first movie is removed as it's used for hero part
-  movies.splice(1, 1); // horror movie removed as it's scary
+  movies.splice(2, 1); // horror movie removed as it's scary
   console.log(movies);
   const homePage = document.createElement("div");
   homePage.innerHTML = `
   <div id="hero" class="w-full h-[550px] text-white">
     <div class="w-full h-full">
-      <div class="absolute w-full h-[550px] bg-gradient-to-r from-gray-700"></div>
-      <img class="w-full h-full object-cover" src="${
-        BACKDROP_BASE_URL + `/` + firstMovie.backdrop_path
-      }" />
-
-      <div class="absolute max-w-xl  top-[20%] pl-6 p-4">
-        <h1 class="text-2xl text-white">${firstMovie.original_title}</h1>
-        <p class="py-8">${firstMovie.overview}</p>
+      <div class='absolute w-96 h-[550px] bg-gradient-to-r from-black'></div>
+      <img class="w-full h-full object-cover" src="${BACKDROP_BASE_URL}/${
+    firstMovie.backdrop_path
+  }" />
+      <div class="absolute top-[20%] pl-6 p-4 md:p-8">
+        <h1 class="text-3xl font-bold text-white">${
+          firstMovie.original_title
+        }</h1>
+        <p class="py-8 max-w-xl">${firstMovie.overview}</p>
       </div>
     </div>
   </div>
-    <div id="gridmovies" class="grid grid-cols-3">
-      ${movies.map(
-        (item) => `
-        <div class="w-72">
-          <img class="rounded-lg" src="${
-            BACKDROP_BASE_URL + `/` + item.poster_path
-          }" />
-        </div>`
-      )}
-    </div>
-  `;
+
+  <div class="drop-shadow-2xl  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    ${movies
+      .map(
+        (item) =>
+          '<div class="group w-72 py-2 hover:scale-110">' +
+          '<img class="rounded-lg" src="' +
+          BACKDROP_BASE_URL +
+          "/" +
+          item.poster_path +
+          '"/>' +
+          '<div class="hidden bg-transparent backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block"><p>' +
+          item.overview +
+          "</p></div>" +
+          "</div>"
+      )
+      .join("")}
+  </div>
+`;
 
   homePage.addEventListener("click", () => {
     movieDetails(movie);
