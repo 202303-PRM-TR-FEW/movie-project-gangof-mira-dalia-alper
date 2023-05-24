@@ -49,7 +49,7 @@ const renderMovies = (movies) => {
   <div id="hero" class="w-full h-[550px] text-white">
     <div class="w-full h-full">
       <div class='absolute w-96 h-[550px] bg-gradient-to-r from-black'></div>
-      <img class="w-full h-full object-cover" src="${BACKDROP_BASE_URL}/${
+      <img class="w-full rounded-lg h-full object-cover" src="${BACKDROP_BASE_URL}/${
     firstMovie.backdrop_path
   }" />
       <div class="absolute top-[20%] pl-6 p-4 md:p-8">
@@ -71,7 +71,7 @@ const renderMovies = (movies) => {
           "/" +
           item.poster_path +
           '"/>' +
-          '<div class="hidden bg-transparent backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block"><p>' +
+          '<div class="hidden bg-white/30 backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block"><p>' +
           item.overview +
           "</p></div>" +
           "</div>"
