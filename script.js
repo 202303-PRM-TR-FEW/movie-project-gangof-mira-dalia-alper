@@ -42,7 +42,7 @@ const renderMovies = (movies) => {
   const firstMovie = movies[0];
   console.log(firstMovie);
   movies.shift(); //first movie is removed as it's used for hero part
-  movies.splice(2, 1); // horror movie removed as it's scary
+  movies.splice(3, 1); // horror movie removed as it's scary
   console.log(movies);
   const homePage = document.createElement("div");
   homePage.innerHTML = `
