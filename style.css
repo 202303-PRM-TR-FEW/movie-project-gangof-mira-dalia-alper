@@ -1,3 +1,12 @@
+body{
+    background-color: #041C32;
+    color: white
+}
+
+h3, h2{
+    color: #ECB365;
+}
+
 #movie-backdrop {
     width: 100%;
 }
@@ -8,4 +17,30 @@
 
 #actors {
     margin: 24px 16px 0 0;
+}
+
+#movie-release-date, #movie-runtime{
+    color: #064663;
+}
+
+i{
+    color: whitesmoke;
+    font-style: normal;
+}
+
+h1{
+    color: #ECB365;
+    text-align: center;
+}
+
+.company-logos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 50px 0;
+}
+
+img{
+    border-radius: 15px;
 }
