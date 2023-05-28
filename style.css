@@ -49,3 +49,13 @@ li, #actors{
     list-style-type: none;
     cursor: pointer;
 }
+
+#trailer{ 
+    background-color: #ECB365;
+    padding: 10px;
+    border-radius: 10px;   
+}
+
+#filmography{
+    margin: 0 50px 30px 50px;
+}
