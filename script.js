@@ -86,12 +86,12 @@ const renderMovie = async (movie) => {
   const castUrl = constructUrl(`movie/${movie.id}/credits`);
   const relatedMoviesList = document.getElementById("related-movies");
   const relatedMoviesUrl = constructUrl(`movie/${movie.id}/similar`);
-
+ 
   const fetchYouTubeTrailer = async (movieTitle) => {
     const searchQuery = encodeURIComponent(`${movieTitle} trailer`);
     const apiKey = 'AIzaSyC_3yJPW4JYGYWgrS-amQkVg533vqEBFjc';
     const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchQuery}&key=${apiKey}&maxResults=1&type=video`;
-
+  
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -102,20 +102,27 @@ const renderMovie = async (movie) => {
       return null;
     }
   };
-
-  const trailerVideoId = await fetchYouTubeTrailer(movie.title);
-  if (trailerVideoId) {
-    const trailerUrl = `https://www.youtube.com/watch?v=${trailerVideoId}`;
-    const trailerLink = document.createElement('a');
-    trailerLink.href = trailerUrl;
-    trailerLink.target = '_blank';
-    trailerLink.textContent = 'Watch Trailer';
-
-    const trailerContainer = document.getElementById("trailer");
-    trailerContainer.appendChild(trailerLink);
-    CONTAINER.appendChild(trailerContainer);
-  }
   
+  const appendTrailerLink = (videoId) => {
+    if (videoId) {
+      const trailerUrl = `https://www.youtube.com/watch?v=${videoId}`;
+      const trailerLink = document.createElement('a');
+      trailerLink.href = trailerUrl;
+      trailerLink.target = '_blank';
+      trailerLink.textContent = 'Watch Trailer';
+  
+      const trailerContainer = document.getElementById("trailer");
+      trailerContainer.appendChild(trailerLink);
+    }
+  };
+  
+  const trailerVideoId = await fetchYouTubeTrailer(movie.title);
+  appendTrailerLink(trailerVideoId);
+  (async () => {
+    const movieTitle = movie.title;
+    const movie = await fetchMovie(movieTitle);
+    await renderMovie(movie);
+  })();
   
   try {
     const relatedMoviesResponse = await fetch(relatedMoviesUrl);
@@ -189,7 +196,6 @@ const fetchAndRenderActorData = async (actorId) => {
         popularity: actorData.popularity
       };
 
-      // Create a new HTML page
       const newPage = document.createElement("html");
       newPage.innerHTML = `
         <head>
@@ -220,7 +226,6 @@ const fetchAndRenderActorData = async (actorId) => {
       </body>
       `;
 
-      // Open the new page in the current window
       document.open();
       document.write(newPage.outerHTML);
       document.close();
