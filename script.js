@@ -55,10 +55,11 @@ const renderMovies = (movies) => {
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovie = async (movie) => {
+  console.log(movie);
   CONTAINER.innerHTML = `
     <div class="row">
       <div class="col-md-4">
-        <img id="movie-backdrop" src=${BACKDROP_BASE_URL + movie.backdrop_path}>
+        <img id="movie-backdrop" src=${BACKDROP_BASE_URL + movie?.backdrop_path}>
         <h2 id="movie-title" class="text-4xl m-3 text-center">${movie.title}</h2>
         <p id="movie-release-date"><b>Release Date:</b> ${movie.release_date}</p>
         <p id="movie-runtime"><b>Runtime:</b> ${movie.runtime} Minutes</p>
@@ -86,7 +87,7 @@ const renderMovie = async (movie) => {
   const castUrl = constructUrl(`movie/${movie.id}/credits`);
   const relatedMoviesList = document.getElementById("related-movies");
   const relatedMoviesUrl = constructUrl(`movie/${movie.id}/similar`);
- 
+
   const fetchYouTubeTrailer = async (movieTitle) => {
     const searchQuery = encodeURIComponent(`${movieTitle} trailer`);
     const apiKey = 'AIzaSyC_3yJPW4JYGYWgrS-amQkVg533vqEBFjc';
@@ -109,20 +110,17 @@ const renderMovie = async (movie) => {
       const trailerLink = document.createElement('a');
       trailerLink.href = trailerUrl;
       trailerLink.target = '_blank';
+      console.log("watch trailer")
       trailerLink.textContent = 'Watch Trailer';
   
       const trailerContainer = document.getElementById("trailer");
       trailerContainer.appendChild(trailerLink);
     }
   };
-  
+
   const trailerVideoId = await fetchYouTubeTrailer(movie.title);
   appendTrailerLink(trailerVideoId);
-  (async () => {
-    const movieTitle = movie.title;
-    const movie = await fetchMovie(movieTitle);
-    await renderMovie(movie);
-  })();
+ 
   
   try {
     const relatedMoviesResponse = await fetch(relatedMoviesUrl);
@@ -174,9 +172,17 @@ const renderMovie = async (movie) => {
  
   
 };
+  (async () => {
+    
+    const movie = await fetchMovie(movieTitle);
+    const movieTitle = movie.title;
+    await renderMovie(movie);
+  })();
+
 
 const actorId = new URLSearchParams(window.location.search).get("id");
 const fetchAndRenderActorData = async (actorId) => {
+  
   const url = constructUrl(`person/${actorId}`);
   try {
     const response = await fetch(`${TMDB_BASE_URL}/person/${actorId}?api_key=36f366620ade5c54e351a12a48a38a81`);
@@ -196,14 +202,8 @@ const fetchAndRenderActorData = async (actorId) => {
         popularity: actorData.popularity
       };
 
-      const newPage = document.createElement("html");
-      newPage.innerHTML = `
-        <head>
-          <title>${actorDetails.name} Details</title>
-          <link rel="stylesheet" href="style.css">
-          <script src="https://cdn.tailwindcss.com"></script>
-        </head>
-        <body>
+      document.head.title = `${actorData.name} Profile`
+      CONTAINER.innerHTML = `
         <div class = "">
           <h1 class= "text-center mt-10 text-2xl">${actorDetails.name}</h1>
           <div class = "grid grid-flow-col auto-cols-auto m-10">
@@ -223,12 +223,11 @@ const fetchAndRenderActorData = async (actorId) => {
             <div id="filmography" class="list-unstyled grid grid-cols-3 col-md-8 gap-20"></div>
           </div>
         </div>
-      </body>
       `;
 
-      document.open();
+     /*  document.open();
       document.write(newPage.outerHTML);
-      document.close();
+      document.close(); */
       console.log("anuthn")
       renderFilmographyData(actorId);
     }
@@ -247,6 +246,7 @@ const fetchMovieCredits = async (actorId) => {
 
 const renderFilmographyData = async (actorId) => {
   const filmographyList = document.getElementById("filmography");
+  console.log (filmographyList, ' this is thw list')
   try {
     const movieCredits = await fetchMovieCredits(actorId);
     const movies = movieCredits.cast.slice(0, 6);
