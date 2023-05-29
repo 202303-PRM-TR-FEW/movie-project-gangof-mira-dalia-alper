@@ -3,37 +3,46 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="./dist/output.css" />
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="./dist/output.css">
     <title>Movie App</title>
   </head>
   <body>
-    <header class="bg-[#ECB365] flex flex-col justify-center h-16 w-full">
-      <ul class="navbar flex justify-evenly text-[#064663]">
-        <li class="font-bold"><a href="#">Home</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropbtn font-bold">Movies</a>
-          <div
-            class="dropdown-content hover:rounded-lg hover:bg-white/30 hover:backdrop-blur-lg"
-          >
+    <header class="flex flex-col justify-center h-16 w-full">
+      <ul class="navbar flex justify-evenly text-white">
+        <li class="pt-1"><a href="#home">Home</a></li>
+        <li class="dropdown pt-1">
+          <a href="#" class="dropbtn">Movies</a>
+          <div class="dropdown-content hover:rounded-lg hover:bg-white/30 hover:backdrop-blur-lg">
             <a href="#">Action</a>
             <a href="#">Sci-Fi</a>
             <a href="#">Comedy</a>
+            <a href="#">Adventure</a>
+            <a href="#">Mystery</a>
             <!-- We can add anything but horror for Dalia  -->
           </div>
         </li>
-        <li class="font-bold"><a href="#">Actor List</a></li>
-        <li class="font-bold"><a href="#">About</a></li>
-        <div
-          class="search-container border-solid rounded-2xl border-4 border-[#064663]"
-        >
+        <li class="dropdown pt-1">
+          <a href="#" class="dropbtn">Filter Movies</a>
+          <div class="dropdown-content hover:rounded-lg hover:bg-white/30 hover:backdrop-blur-lg">
+            <a href="#">Popular</a>
+            <a href="#">Release Date</a>
+            <a href="#">Top Rated</a>
+            <a href="#">Now Playing</a>
+            <a href="#">Up Coming</a>
+          </div>
+        </li>
+        <li class="pt-1"><a href="#">Actor List</a></li>
+        <li class="pt-1"><a href="#">About</a></li>
+        <div id="searchForm" class="search-container p-1.5 rounded bg-[#434242]">
           <input
-            class="rounded-l-2xl"
+            class="search-input text-white bg-[#434242]"
             type="text"
             placeholder="Search..."
             id="search-box"
           />
-          <button class="rounded-r-2xl px-4" type="submit" onclick="search()">
-            Search
+          <button type="submit" onclick="search()">
+            <img class="search-icon h-4 px-1" src="assets/search-icon.png">
           </button>
         </div>
       </ul>

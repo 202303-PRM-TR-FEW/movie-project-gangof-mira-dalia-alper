@@ -418,10 +418,14 @@ const renderActors = (actors) => {
 };
 
 // Mira's search function
-function search() {
-  var searchTerm = document.getElementById("search-box").value;
-  // Perform search logic and display results
-}
+// function search() {
+//   var searchTerm = document.getElementById("search-box").value;
+//   // Perform search logic and display results
+// }
+
+
+
+
 
 ///////////////////////////////////////
 document.addEventListener("DOMContentLoaded", autorun);

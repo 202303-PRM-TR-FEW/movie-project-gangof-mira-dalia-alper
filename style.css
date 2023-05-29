@@ -17,6 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 32px;
 }
 
 #actors {
@@ -27,18 +28,6 @@ body {
 h3,
 h2 {
   color: #ecb365;
-}
-
-#movie-backdrop {
-  width: 100%;
-}
-
-.container {
-  padding-top: 32px;
-}
-
-#actors {
-  margin: 24px 16px 0 0;
 }
 
 #movie-release-date,
@@ -84,6 +73,10 @@ li,
   margin: 0 50px 30px 50px;
 }
 
+input::placeholder{
+  color: grey;
+}
+
 /* Mira's CSS */
 /* Mouse pointer styles */
 main:hover {
@@ -108,4 +101,8 @@ main:hover {
 
 .navbar .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.navbar>li:hover{
+  color: #22A39F;
 }
