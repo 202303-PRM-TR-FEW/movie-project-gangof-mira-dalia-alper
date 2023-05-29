@@ -7,7 +7,67 @@
     <title>Movie App</title>
   </head>
   <body>
+    <header class="bg-[#ECB365] flex flex-col justify-center h-16 w-full">
+      <ul class="navbar flex justify-evenly text-[#064663]">
+        <li class="font-bold"><a href="#">Home</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropbtn font-bold">Movies</a>
+          <div
+            class="dropdown-content hover:rounded-lg hover:bg-white/30 hover:backdrop-blur-lg"
+          >
+            <a href="#">Action</a>
+            <a href="#">Sci-Fi</a>
+            <a href="#">Comedy</a>
+            <!-- We can add anything but horror for Dalia  -->
+          </div>
+        </li>
+        <li class="font-bold"><a href="#">Actor List</a></li>
+        <li class="font-bold"><a href="#">About</a></li>
+        <div
+          class="search-container border-solid rounded-2xl border-4 border-[#064663]"
+        >
+          <input
+            class="rounded-l-2xl"
+            type="text"
+            placeholder="Search..."
+            id="search-box"
+          />
+          <button class="rounded-r-2xl px-4" type="submit" onclick="search()">
+            Search
+          </button>
+        </div>
+      </ul>
+    </header>
     <div class="container w-full"></div>
+    <footer class="h-40 w-full bg-[#ECB365] relative">
+      <div class="footer-content flex flex-col justify-center items-center">
+        <p class="py-2 text-[#064663]">
+          Done by Mira, Alper and Dalia. You can access our github profiles by
+          clicking on the pictures below
+        </p>
+        <div class="flex">
+          <!-- here we add our links to our github profiles-->
+          <a href="https://github.com/bohemianmir" target="_blank"
+            ><img
+              class="rounded-full border-8 border-solid border-[#064663]"
+              src="./assets/mira-pic.jpeg"
+              alt="GitHub"
+          /></a>
+          <a href="https://github.com/Alperadoss" class="px-24" target="_blank"
+            ><img
+              class="rounded-full border-8 border-solid border-[#064663]"
+              src="./assets/alper-pic.jpeg"
+              alt="GitHub"
+          /></a>
+          <a href="https://github.com/daliakhalifa02" target="_blank"
+            ><img
+              class="rounded-full border-8 border-solid border-[#064663]"
+              src="./assets/dalia-pic.jpeg"
+              alt="GitHub"
+          /></a>
+        </div>
+      </div>
+    </footer>
     <script type="text/javascript" src="script.js"></script>
   </body>
 </html>
