@@ -67,7 +67,7 @@ const renderMovies = (movies) => {
     const movieElement = document.createElement("div");
     movieElement.classList.add("group", "w-72", "py-2", "hover:scale-105");
     movieElement.innerHTML = `
-    <img class="rounded-lg" src="${BACKDROP_BASE_URL}${movie.poster_path}"/>
+    <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${movie.poster_path}"/>
     <div class="hidden bg-white/30 backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block">
       <p>${movie.overview}</p>
     </div>
