@@ -677,10 +677,6 @@ video {
   max-width: 36rem;
 }
 
-.resize {
-  resize: both;
-}
-
 .auto-cols-auto {
   grid-auto-columns: auto;
 }
