@@ -40,7 +40,7 @@ const fetchMovie = async (movieId) => {
 
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
-  const firstMovie = movies[0];
+  let chosenMovie = movies[0];
   movies.shift(); // First movie is removed as it's used for the hero part
   movies.splice(2, 1); // Horror movie removed as it's scary
   console.log(movies);
@@ -50,22 +50,24 @@ const renderMovies = (movies) => {
       <div id="hero" class="w-full h-[550px] text-white">
         <div class="w-full h-full">
           <div class='absolute w-96 h-[550px] rounded-lg bg-gradient-to-r from-black'></div>
-          <img class="w-full rounded-lg h-full object-cover" src="${BACKDROP_BASE_URL}/${firstMovie.backdrop_path}" />
+          <img class="w-full rounded-lg h-full object-cover" src="${BACKDROP_BASE_URL}/${chosenMovie.backdrop_path}" />
           <div class="absolute top-[20%] pl-6 p-4 md:p-8">
-            <h1 class="text-3xl font-bold text-white">${firstMovie.original_title}</h1>
-            <p class="py-8 max-w-xl">${firstMovie.overview}</p>
+            <h1 class="text-3xl font-bold text-white">${chosenMovie.original_title}</h1>
+            <p class="py-8 max-w-xl">${chosenMovie.overview}</p>
+            <button onclick="detailOpener(chosenMovie)">Details</button>
           </div>
         </div>
       </div>
       <div id="moviesgrid" class="drop-shadow-2xl grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3">
       </div>
     `;
+
   CONTAINER.appendChild(homePage);
 
   const moviesgrid = document.getElementById("moviesgrid");
   movies.forEach((movie) => {
     const movieElement = document.createElement("div");
-    movieElement.classList.add("group", "w-72", "py-2", "hover:scale-105");
+    movieElement.classList.add("group", "w-full", "py-2", "hover:scale-105");
     movieElement.innerHTML = `
     <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${movie.poster_path}"/>
     <div class="hidden bg-white/30 backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block">
@@ -83,6 +85,7 @@ const renderMovies = (movies) => {
     }
   });
 };
+
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovie = async (movie) => {
   console.log(movie);
