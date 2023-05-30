@@ -3,17 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="style.css"/>
-    <link rel="stylesheet" href="./dist/output.css">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./dist/output.css" />
     <title>Movie App</title>
   </head>
   <body>
     <header class="flex flex-col justify-center h-16 w-full">
       <ul class="navbar flex justify-evenly text-white">
         <li class="pt-1"><a href="#home">Home</a></li>
-        <li class="dropdown pt-1">
-          <a href="#" class="dropbtn">Movies</a>
-          <div class="dropdown-content hover:rounded-lg hover:bg-white/30 hover:backdrop-blur-lg">
+        <li class="dropdown group pt-1">
+          <a href="#" class="dropbtn">Genres</a>
+          <div
+            class="dropdown-content group-hover:rounded-lg group-hover:bg-white/30 group-hover:backdrop-blur-lg"
+          >
             <a href="#">Action</a>
             <a href="#">Sci-Fi</a>
             <a href="#">Comedy</a>
@@ -22,9 +24,11 @@
             <!-- We can add anything but horror for Dalia  -->
           </div>
         </li>
-        <li class="dropdown pt-1">
+        <li class="dropdown group pt-1">
           <a href="#" class="dropbtn">Filter Movies</a>
-          <div class="dropdown-content hover:rounded-lg hover:bg-white/30 hover:backdrop-blur-lg">
+          <div
+            class="dropdown-content group-hover:rounded-lg group-hover:bg-white/30 group-hover:backdrop-blur-lg"
+          >
             <a href="#">Popular</a>
             <a href="#">Release Date</a>
             <a href="#">Top Rated</a>
@@ -32,9 +36,12 @@
             <a href="#">Up Coming</a>
           </div>
         </li>
-        <li class="pt-1"><a href="#">Actor List</a></li>
+        <li class="pt-1"><a onclick="actorPage()" href="#">Actor List</a></li>
         <li class="pt-1"><a href="#">About</a></li>
-        <div id="searchForm" class="search-container p-1.5 rounded bg-[#434242]">
+        <div
+          id="searchForm"
+          class="search-container p-1.5 rounded bg-[#434242]"
+        >
           <input
             class="search-input text-white bg-[#434242]"
             type="text"
@@ -42,7 +49,7 @@
             id="search-box"
           />
           <button type="submit" onclick="search()">
-            <img class="search-icon h-4 px-1" src="assets/search-icon.png">
+            <img class="search-icon h-4 px-1" src="assets/search-icon.png" />
           </button>
         </div>
       </ul>
