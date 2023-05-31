@@ -261,11 +261,6 @@ const fetchAndRenderActorData = async (actorId) => {
           </div>
         </div>
       `;
-
-      /*  document.open();
-      document.write(newPage.outerHTML);
-      document.close(); */
-      console.log("anuthn");
       renderFilmographyData(actorId);
     }
   } catch (error) {
