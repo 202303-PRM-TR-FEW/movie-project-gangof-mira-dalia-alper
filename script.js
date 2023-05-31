@@ -211,15 +211,20 @@ function search() {
   `;
         CONTAINER.appendChild(movieElement);
       }
+      CONTAINER.addEventListener("click", async () => {
+        const movieDetails = await fetchMovie(movie.id);
+        renderMovie(movieDetails);
     });
+    });
+    
 
-    CONTAINER.addEventListener("click", (event) => {
-      const movieElement = event.target.closest(".group");
-      if (movieElement) {
-        const index = Array.from(moviesgrid.children).indexOf(movieElement);
-        movieDetails(searchResult[index]);
-      }
-    });
+    // CONTAINER.addEventListener("click", (event) => {
+    //   const movieElement = event.target.closest(".group");
+    //   if (movieElement) {
+    //     const index = Array.from(moviesgrid.children).indexOf(movieElement);
+    //     movieDetails(searchResult[index]);
+    //   }
+    // });
   };
 }
 
@@ -312,6 +317,7 @@ const renderMovies = (movies) => {
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovie = async (movie) => {
   console.log(movie);
+  // CONTAINER.innerHtml = "";
   CONTAINER.innerHTML = `
     <div class="row">
       <div class="col-md-4">
@@ -397,16 +403,16 @@ const renderMovie = async (movie) => {
       relatedMovieItem.appendChild(relatedMovieImage);
       relatedMoviesList.appendChild(relatedMovieItem);
       
-        if (relatedMovie.poster_path) {
-          const movieElement = document.createElement("div");
-          movieElement.classList.add("group", "w-72", "py-2", "hover:scale-105");
-          movieElement.innerHTML = `
-          <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${relatedMovie.poster_path}"/>
-          <div class="hidden bg-white/30 backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block">
-            <p>${relatedMovie.overview}</p>
-          </div>`
-          CONTAINER.appendChild(movieElement);
-        }
+        // if (relatedMovie.poster_path) {
+        //   const movieElement = document.createElement("div");
+        //   movieElement.classList.add("group", "w-72", "py-2", "hover:scale-105");
+        //   movieElement.innerHTML = `
+        //   <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${relatedMovie.poster_path}"/>
+        //   <div class="hidden bg-white/30 backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block">
+        //     <p>${relatedMovie.overview}</p>
+        //   </div>`
+        //   CONTAINER.appendChild(movieElement);
+        // }
       
       relatedMovieItem.addEventListener("click", async () => {
         const relatedMovieDetails = await fetchMovie(relatedMovie.id);
@@ -444,11 +450,11 @@ const renderMovie = async (movie) => {
   const directorName = await fetchDirectorName(movie.id);
   renderDirectorName(directorName);
 };
-(async () => {
-  const movie = await fetchMovie(movieTitle);
-  const movieTitle = movie.title;
-  await renderMovie(movie);
-})();
+// (async () => {
+//   const movie = await fetchMovie(movieTitle);
+//   const movieTitle = movie.title;
+//   await renderMovie(movie);
+// })();
 
 const actorId = new URLSearchParams(window.location.search).get("id");
 const fetchAndRenderActorData = async (actorId) => {
@@ -515,7 +521,7 @@ const fetchMovieCredits = async (actorId) => {
 
 const renderFilmographyData = async (actorId) => {
   const filmographyList = document.getElementById("filmography");
-  console.log(filmographyList, " this is thw list");
+  console.log(filmographyList, " this is the list");
   try {
     const movieCredits = await fetchMovieCredits(actorId);
     const movies = movieCredits.cast.slice(0, 6);
