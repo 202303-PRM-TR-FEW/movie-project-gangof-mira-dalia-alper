@@ -4,10 +4,230 @@ const PROFILE_BASE_URL = "http://image.tmdb.org/t/p/w185";
 const BACKDROP_BASE_URL = "http://image.tmdb.org/t/p/w780";
 const CONTAINER = document.querySelector(".container");
 
+const homebtn = document.querySelector("#homebtn");
+let ArrayOfMovies = [];
+
+//Movies by Genre
+function movieByGenre(genreId) {
+  let searchResult = [];
+  CONTAINER.innerHTML = "";
+  CONTAINER.setAttribute("class","container");
+  const searchUrl = `${TMDB_BASE_URL}/discover/movie?api_key=36f366620ade5c54e351a12a48a38a81&with_genres=${genreId}`;
+  const fetchData = async () => {
+    try {
+      const searchRes = await fetch(searchUrl);
+      const searchObj = await searchRes.json();
+      searchResult = searchObj.results;
+      renderMovies(searchResult);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  fetchData().catch((error) => {
+    console.error(error);
+  });
+}
+
+//Sort by date
+function sortByDate() {
+  ArrayOfMovies.sort((a, b) => {
+    const yearA = parseInt(a.release_date.slice(0, 4));
+    const yearB = parseInt(b.release_date.slice(0, 4));
+    return yearA - yearB;
+  });
+  CONTAINER.innerHTML = "";
+  CONTAINER.setAttribute("class", "container");
+  renderMovies(ArrayOfMovies);
+}
+
+//Movie Lists like Popular, upcoming, now playing etc.
+function movieList(subject) {
+  let searchResult = [];
+  CONTAINER.innerHTML = "";
+  CONTAINER.setAttribute("class","container");
+  const fetchData = async () => {
+    try {
+      const searchUrl = `${TMDB_BASE_URL}/movie/${subject}?api_key=36f366620ade5c54e351a12a48a38a81`;
+      const searchRes = await fetch(searchUrl);
+      const searchObj = await searchRes.json();
+      searchResult = searchObj.results;
+      renderMovies(searchResult);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  fetchData().catch((error) => {
+    console.error(error);
+  });
+}
+
+//About Page Frontend Warriors
+function renderAboutPage() {
+  CONTAINER.innerHTML = `
+    <div class="row">
+      <div class="col-md-4">
+        <img id="movie-backdrop" src=${
+          BACKDROP_BASE_URL + movie?.backdrop_path
+        }>
+        <h2 id="movie-title" class="text-4xl m-3 text-center">${
+          movie.title
+        }</h2>
+        <p id="movie-release-date"><b>Release Date:</b> ${
+          movie.release_date
+        }</p>
+        <p id="movie-runtime"><b>Runtime:</b> ${movie.runtime} Minutes</p>
+      </div>
+      <div class="col-md-8">
+        <h3 class="mt-2"><b>Overview:</b></h3>
+        <p id="movie-overview">${movie.overview}</p>
+        <h3 class="mt-2"><b>Ratings:</b> <i>${movie.vote_average}</i></h3>
+        <h3 class="mt-2"><b>Genre:</b> <i>${movie.genres.map(
+          (genre) => genre.name
+        )}</i></h3>
+        <h3 class="mt-2"><b>Language:</b> <i>${movie.original_language}</i></h3>
+        <h3 class="mt-2"><b>Director:</b> <i id="movie-director"></i></h3>
+      </div>
+      <div class="grid place-items-center">
+        <div id="trailer"></div>
+        <h2 class="mt-10 text-white text-xl"><b>Main Actors of the Movie</b></h2>
+        <div id="actors" class="hover:ease-in duration-300 list-unstyled grid grid-cols-3 gap-20"></div>
+        <h2 class="mt-20 mb-2 text-white text-xl"><b>Related Movies:</b></h2>
+        <div id="related-movies" class="list-unstyled grid grid-cols-3 col-md-8 gap-20 hover:ease-in duration-300 "></div>
+      </div>
+    </div>`;
+  CONTAINER.innerHTML = `
+    <div class = "">
+      <h1 class= "text-center mt-10 text-2xl">${actorDetails.name}</h1>
+      <div class = "grid grid-flow-col auto-cols-auto m-10">
+        <div class = "col-md-4">
+          <img src="${PROFILE_BASE_URL}${actorDetails.profilePath}" alt="${
+    actorDetails.name
+  } Profile Picture">
+        </div>
+        <div class="col-md-8 mx-6">
+          <h3><b>Biography:</b></h3>
+          <p>${actorDetails.biography}</p>
+          <h3><b>Birthday:</b>  <i>${actorDetails.birthday}</i></h3>
+          <h3><b>Gender:</b>  <i>${
+            actorDetails.gender === 1 ? "female" : "male"
+          }</i></h3>
+          <h3><b>Popularity:</b>  <i>${actorDetails.popularity}</i></h3>
+        </div>
+      </div>
+      <div class="grid place-items-center">
+        <h3 class="m-5"><b>Actor's movies:</b></h3>
+        <div id="filmography" class="list-unstyled grid grid-cols-3 col-md-8 gap-20"></div>
+      </div>
+    </div>
+  `;
+}
+
+//Navbar Buttons
+function actorPage() {
+  let searchResult = [];
+
+  const searchUrl = `${TMDB_BASE_URL}/trending/person/day?api_key=36f366620ade5c54e351a12a48a38a81`;
+  const fetchData = async () => {
+    try {
+      const searchRes = await fetch(searchUrl);
+      const searchObj = await searchRes.json();
+      searchResult = searchObj.results;
+      renderResults(searchResult); // Call renderResults inside fetchData
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchData().catch((error) => {
+    console.error(error);
+  });
+
+  const renderResults = (searchResult) => {
+    CONTAINER.innerHTML = "";
+    CONTAINER.setAttribute(
+      "class",
+      "drop-shadow-2xl w-full grid grid-cols-1 md:grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-5"
+    );
+
+    searchResult.forEach((person) => {
+      if (person.profile_path) {
+        const personElement = document.createElement("div");
+        personElement.classList.add("w-72", "py-2", "hover:scale-105");
+        personElement.innerHTML = `
+    <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${person.profile_path}"/>
+    <div class="bg-white/30 backdrop-blur-lg rounded-lg bg-white p-4 shadow-md">
+      <p>${person.original_name}</p>
+    </div>
+  `;
+        CONTAINER.appendChild(personElement);
+
+        personElement.setAttribute("data-actor-id", person.id);
+        personElement.addEventListener("click", async () => {
+          const actorId = personElement.getAttribute("data-actor-id");
+          await fetchAndRenderActorData(actorId);
+        });
+      }
+    });
+  };
+}
+
+// Search Function
+function search() {
+  let searchResult = [];
+  const input = document.getElementById("search-box").value;
+  const searchUrl = `${TMDB_BASE_URL}/search/movie?api_key=36f366620ade5c54e351a12a48a38a81&query=${input}`;
+  const fetchData = async () => {
+    try {
+      const searchRes = await fetch(searchUrl);
+      const searchObj = await searchRes.json();
+      searchResult = searchObj.results;
+      console.log(searchResult);
+      renderResults(searchResult); // Call renderResults inside fetchData
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchData().catch((error) => {
+    console.error(error);
+  });
+
+  const renderResults = (searchResult) => {
+    CONTAINER.innerHTML = "";
+    CONTAINER.setAttribute(
+      "class",
+      "drop-shadow-2xl w-full grid grid-cols-1 md:grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-5"
+    );
+
+    searchResult.forEach((movie) => {
+      if (movie.poster_path) {
+        const movieElement = document.createElement("div");
+        movieElement.classList.add("group", "w-72", "py-2", "hover:scale-105");
+        movieElement.innerHTML = `
+          <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${movie.poster_path}"/>
+          <div class="hidden bg-white/30 backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block">
+            <p>${movie.overview}</p>
+          </div>
+  `;
+        CONTAINER.appendChild(movieElement);
+      }
+    });
+
+    CONTAINER.addEventListener("click", (event) => {
+      const movieElement = event.target.closest(".group");
+      if (movieElement) {
+        const index = Array.from(moviesgrid.children).indexOf(movieElement);
+        movieDetails(searchResult[index]);
+      }
+    });
+  };
+}
+
 // Don't touch this function please
 const autorun = async () => {
   const movies = await fetchMovies();
   renderMovies(movies.results);
+  ArrayOfMovies = movies.results;
 };
 
 // Don't touch this function please
@@ -41,10 +261,6 @@ const fetchMovie = async (movieId) => {
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovies = (movies) => {
   const firstMovie = movies[0];
-  movies.shift(); // First movie is removed as it's used for the hero part
-  movies.splice(2, 1); // Horror movie removed as it's scary
-  console.log(movies);
-
   const homePage = document.createElement("div");
   homePage.innerHTML = `
       <div id="hero" class="w-full h-[550px] text-white">
@@ -82,7 +298,17 @@ const renderMovies = (movies) => {
       movieDetails(movies[index]);
     }
   });
-};
+  // searchResult.forEach((movie) => {
+  //   if (movie.poster_path) {
+  //     const movieElement = document.createElement("div");
+  //     movieElement.classList.add("group", "w-72", "py-2", "hover:scale-105");
+  //     movieElement.innerHTML = `
+  //     <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${movie.poster_path}"/>
+  //     <div class="hidden bg-white/30 backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block">
+  //       <p>${movie.overview}</p>`
+  //   }
+  // });
+}
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovie = async (movie) => {
   console.log(movie);
@@ -118,7 +344,7 @@ const renderMovie = async (movie) => {
         <div id="related-movies" class="list-unstyled grid grid-cols-3 col-md-8 gap-20 hover:ease-in duration-300 "></div>
       </div>
     </div>`;
-
+    
   const companyLogos = await fetchCompanyLogos(movie.production_companies);
   renderCompanyLogos(companyLogos);
 
@@ -170,6 +396,18 @@ const renderMovie = async (movie) => {
       relatedMovieImage.src = BACKDROP_BASE_URL + relatedMovie.poster_path;
       relatedMovieItem.appendChild(relatedMovieImage);
       relatedMoviesList.appendChild(relatedMovieItem);
+      
+        if (relatedMovie.poster_path) {
+          const movieElement = document.createElement("div");
+          movieElement.classList.add("group", "w-72", "py-2", "hover:scale-105");
+          movieElement.innerHTML = `
+          <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${relatedMovie.poster_path}"/>
+          <div class="hidden bg-white/30 backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block">
+            <p>${relatedMovie.overview}</p>
+          </div>`
+          CONTAINER.appendChild(movieElement);
+        }
+      
       relatedMovieItem.addEventListener("click", async () => {
         const relatedMovieDetails = await fetchMovie(relatedMovie.id);
         renderMovie(relatedMovieDetails);
@@ -178,7 +416,7 @@ const renderMovie = async (movie) => {
   } catch (error) {
     console.error("Error retrieving related movies:", error);
   }
-
+  
   try {
     const castResponse = await fetch(castUrl);
     const castData = await castResponse.json();
@@ -412,15 +650,13 @@ const renderActors = (actors) => {
   CONTAINER.appendChild(homePage);
 };
 
-// Mira's search function
-// function search() {
-//   var searchTerm = document.getElementById("search-box").value;
-//   // Perform search logic and display results
-// }
-
-
-
-
-
 ///////////////////////////////////////
 document.addEventListener("DOMContentLoaded", autorun);
+
+//home button on header
+homebtn.addEventListener("click", homescreen);
+function homescreen() {
+  CONTAINER.innerHTML = "";
+  CONTAINER.setAttribute("class", "container");
+  autorun();
+}
