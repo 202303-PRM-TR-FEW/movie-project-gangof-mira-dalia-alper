@@ -291,20 +291,27 @@ const renderMovie = async (movie) => {
   console.log(movie);
   CONTAINER.innerHTML = `
     <div class="row">
-      <div class="col-md-4">
-        <img id="movie-backdrop" src=${
-          movie.backdrop_path
-            ? BACKDROP_BASE_URL + movie.backdrop_path
-            : BACKDROP_BASE_URL + movie.poster_path
-        }>
-        <h2 id="movie-title" class="text-4xl m-3 text-center">${
-          movie.title
-        }</h2>
-        <p id="movie-release-date"><b>Release Date:</b> ${
-          movie.release_date
-        }</p>
-        <p id="movie-runtime"><b>Runtime:</b> ${movie.runtime} Minutes</p>
+    <div id="hero" class="w-full h-[550px] text-white">
+    <div class="w-full h-full">
+      <div class='absolute w-96 h-[550px] rounded-lg bg-gradient-to-r from-black'></div>
+      <img class="w-full rounded-lg h-full object-cover" src="${BACKDROP_BASE_URL}/${
+    movie.backdrop_path
+  }" />
+      <div class="absolute top-[20%] pl-6 p-4 md:p-8">
+        <div class="flex items-center">
+        </div>
+        <div class="flex flex-col items-start">
+          <h1 class="text-3xl font-bold text-white">${movie.original_title}</h1>
+          <div class="flex justify-start"><p>${movie.runtime} minutes</p>
+              <p class="px-8">${movie.vote_average}</p>
+              <p>${movie.genres.map((genre) => genre.name)}</p>
+          </div>
+          <p class="py-8 max-w-xl">${movie.overview}</p>
+        </div>
+        
       </div>
+    </div>
+  </div>
       <div class="col-md-8">
         <h3 class="mt-2"><b>Overview:</b></h3>
         <p id="movie-overview">${movie.overview}</p>

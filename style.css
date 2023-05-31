@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: rgb(4, 28, 50);
+  background-color: rgb(34, 34, 34);
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -73,7 +73,7 @@ li,
   margin: 0 50px 30px 50px;
 }
 
-input::placeholder{
+input::placeholder {
   color: grey;
 }
 
@@ -103,6 +103,6 @@ main:hover {
   display: block;
 }
 
-.navbar>li:hover{
-  color: #22A39F;
+.navbar > li:hover {
+  color: #22a39f;
 }
