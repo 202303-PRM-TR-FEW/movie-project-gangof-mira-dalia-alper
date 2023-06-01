@@ -814,6 +814,18 @@ video {
   background-color: rgb(255 255 255 / 0.6);
 }
 
+.bg-\[\#F3EFE0\]\/30 {
+  background-color: rgb(243 239 224 / 0.3);
+}
+
+.bg-\[\#F3EFE0\]\/80 {
+  background-color: rgb(243 239 224 / 0.8);
+}
+
+.bg-\[\#F3EFE0\]\/60 {
+  background-color: rgb(243 239 224 / 0.6);
+}
+
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }

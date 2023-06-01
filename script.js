@@ -131,7 +131,7 @@ function actorPage() {
         personElement.classList.add("w-72", "py-2", "hover:scale-105");
         personElement.innerHTML = `
     <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${person.profile_path}"/>
-    <div class="bg-white/30 backdrop-blur-lg rounded-lg bg-white p-4 shadow-md">
+    <div class="bg-[#F3EFE0]/60 backdrop-blur-lg rounded-lg bg-white p-4 shadow-md">
       <p>${person.original_name}</p>
     </div>
   `;
@@ -475,7 +475,6 @@ const fetchMovieCredits = async (actorId) => {
 
 const renderFilmographyData = async (actorId) => {
   const filmographyList = document.getElementById("filmography");
-  console.log(filmographyList, " this is the list");
   try {
     const movieCredits = await fetchMovieCredits(actorId);
     const movies = movieCredits.cast.slice(0, 6);
