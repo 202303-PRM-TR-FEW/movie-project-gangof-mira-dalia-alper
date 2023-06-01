@@ -122,7 +122,7 @@ function actorPage() {
     CONTAINER.innerHTML = "";
     CONTAINER.setAttribute(
       "class",
-      "drop-shadow-2xl w-full grid grid-cols-1 md:grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-5"
+      "drop-shadow-2xl w-full grid grid-cols-1 md:grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
     );
 
     searchResult.forEach((person) => {
@@ -131,8 +131,8 @@ function actorPage() {
         personElement.classList.add("w-72", "py-2", "hover:scale-105");
         personElement.innerHTML = `
     <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${person.profile_path}"/>
-    <div class="bg-[#F3EFE0]/60 backdrop-blur-lg rounded-lg bg-white p-4 shadow-md">
-      <p>${person.original_name}</p>
+    <div class="relative bottom-20 left-6 bg-[#F3EFE0]/30 backdrop-blur-lg w-60 rounded-lg bg-white p-4 shadow-md">
+      <p class="text-center">${person.original_name}</p>
     </div>
   `;
         CONTAINER.appendChild(personElement);
@@ -234,7 +234,7 @@ const renderMovies = (movies) => {
     movieElement.classList.add("group", "w-72", "py-2", "hover:scale-105");
     movieElement.innerHTML = `
     <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${movie.poster_path}"/>
-    <div class="hidden bg-white/30 backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block">
+    <div class="hidden bg-white/30 h-full backdrop-blur-lg absolute rounded-lg top-0 left-0 bg-white p-4 shadow-md group-hover:block">
       <p>${movie.overview}</p>
     </div>
   `;
@@ -254,7 +254,6 @@ const renderMovie = async (movie) => {
   CONTAINER.innerHTML = "";
   CONTAINER.setAttribute("class", "container");
   console.log(movie);
-  // CONTAINER.innerHtml = "";
   CONTAINER.innerHTML = `
     <div class="row">
       <div id="hero" class="w-full h-[550px] text-white">
@@ -346,18 +345,6 @@ const renderMovie = async (movie) => {
       relatedMovieImage.src = BACKDROP_BASE_URL + relatedMovie.poster_path;
       relatedMovieItem.appendChild(relatedMovieImage);
       relatedMoviesList.appendChild(relatedMovieItem);
-
-      // if (relatedMovie.poster_path) {
-      //   const movieElement = document.createElement("div");
-      //   movieElement.classList.add("group", "w-72", "py-2", "hover:scale-105");
-      //   movieElement.innerHTML = `
-      //     <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${relatedMovie.poster_path}"/>
-      //     <div class="hidden bg-white/30 backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block">
-      //       <p>${relatedMovie.overview}</p>
-      //     </div>`;
-      //   CONTAINER.appendChild(movieElement);
-      // }
-
       relatedMovieItem.addEventListener("click", async () => {
         const relatedMovieDetails = await fetchMovie(relatedMovie.id);
         renderMovie(relatedMovieDetails);
@@ -394,13 +381,9 @@ const renderMovie = async (movie) => {
   const directorName = await fetchDirectorName(movie.id);
   renderDirectorName(directorName);
 };
-// (async () => {
-//   const movie = await fetchMovie(movieTitle);
-//   const movieTitle = movie.title;
-//   await renderMovie(movie);
-// })();
 
 const actorId = new URLSearchParams(window.location.search).get("id");
+
 const fetchAndRenderActorData = async (actorId) => {
   const url = constructUrl(`person/${actorId}`);
   try {
@@ -423,9 +406,12 @@ const fetchAndRenderActorData = async (actorId) => {
         popularity: actorData.popularity,
       };
 
+      CONTAINER.innerHTML = "";
+      CONTAINER.setAttribute("class", "container");
+
       document.head.title = `${actorData.name} Profile`;
       CONTAINER.innerHTML = `
-        <div class = "">
+        <div class = "container">
           <h1 class= "text-center mt-10 text-2xl">${actorDetails.name}</h1>
           <div class = "grid grid-flow-col auto-cols-auto m-10">
             <div class = "col-md-4">

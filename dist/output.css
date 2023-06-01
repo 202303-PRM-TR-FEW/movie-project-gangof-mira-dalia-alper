@@ -584,6 +584,38 @@ video {
   top: 100%;
 }
 
+.top-0 {
+  top: 0px;
+}
+
+.top-24 {
+  top: 6rem;
+}
+
+.left-24 {
+  left: 6rem;
+}
+
+.top-36 {
+  top: 9rem;
+}
+
+.top-\[-8\] {
+  top: -8;
+}
+
+.bottom-8 {
+  bottom: 2rem;
+}
+
+.bottom-24 {
+  bottom: 6rem;
+}
+
+.bottom-20 {
+  bottom: 5rem;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -751,6 +783,10 @@ video {
 
 .gap-8 {
   gap: 2rem;
+}
+
+.place-self-center {
+  place-self: center;
 }
 
 .rounded {
@@ -1134,6 +1170,16 @@ main:hover {
 
 @media (min-width: 1280px) {
   .xl\:grid-cols-5 {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1536px) {
+  .\32xl\:grid-cols-5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
