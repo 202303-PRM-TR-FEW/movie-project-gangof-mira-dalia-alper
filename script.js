@@ -176,19 +176,18 @@ function search() {
     );
    
     searchResult.forEach((movie) => {
-      let moviePoster = movie.poster_path;
-      // if (moviePoster) {
+       if (movie.poster_path) {
         const movieElement = document.createElement("div");
         movieElement.classList.add("group", "w-72", "py-2", "hover:scale-105");
         movieElement.innerHTML = `
-          <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${moviePoster}"/>
+          <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${movie.poster_path}"/>
           <div class="hidden bg-white/30 backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block">
             <p>${movie.overview}</p>
           </div>
   `;
         CONTAINER.appendChild(movieElement);
-      // }
-      moviePoster.addEventListener("click", async () => {
+      }
+      CONTAINER.addEventListener("click", async () => {
         const movieDetails = await fetchMovie(movie.id);
         renderMovie(movieDetails);
     });
@@ -304,8 +303,8 @@ const renderMovie = async (movie) => {
     <div class="row">
       <div id="hero" class="w-full h-[550px] text-white">
         <div class="w-full h-full">
-          <div class='absolute w-96 h-[550px] rounded-lg bg-gradient-to-r from-black'></div>
-            <img class="w-full rounded-lg h-full object-cover" src="${BACKDROP_BASE_URL}/${movie.backdrop_path}"/>
+          <div class='absolute w-full h-[550px] rounded-lg bg-[#000000]/40'></div>
+          <img class="w-full rounded-lg h-full object-cover" src="${BACKDROP_BASE_URL}/${movie.backdrop_path}"/>
             <div class="absolute top-[20%] pl-6 p-4 md:p-8 flex items-center gap-8">
               <div class="">
                 <img class="w-64" src="${BACKDROP_BASE_URL}${movie.poster_path}"/>
@@ -318,9 +317,9 @@ const renderMovie = async (movie) => {
                 </div>
                 <p class="py-8 max-w-xl">${movie.overview}</p>
                 <div class="flex gap-6">
-                  <div id="trailer" class="bg-[#22a39f] p-4 rounded-lg"></div>
+                  <div id="trailer" class="bg-[#22a39f] p-2 rounded-lg"></div>
                     <h3 class="mt-2"><i>${movie.original_language}</i></h3>
-                    <h3 class="mt-2 text-[#22a39f]">Director: <i id="movie-director"></i></h3>
+                    <h3 class="mt-2 text-[#22a39f]"><b>Director:</b> <i id="movie-director"></i></h3>
                   </div>
                 </div>
               </div>
