@@ -150,6 +150,10 @@ function actorPage() {
 // Search Function
 function search() {
   let searchResult = [];
+
+  CONTAINER.innerHTML = "";
+  CONTAINER.setAttribute("class", "container");
+
   const input = document.getElementById("search-box").value;
   const searchUrl = `${TMDB_BASE_URL}/search/movie?api_key=36f366620ade5c54e351a12a48a38a81&query=${input}`;
   const fetchData = async () => {
@@ -157,54 +161,16 @@ function search() {
       const searchRes = await fetch(searchUrl);
       const searchObj = await searchRes.json();
       searchResult = searchObj.results;
+      searchResult = searchResult.filter((item) => item.poster_path);
       console.log(searchResult);
-      renderResults(searchResult); // Call renderResults inside fetchData
+      renderMovies(searchResult); // Call renderResults inside fetchData
     } catch (error) {
       console.error(error);
     }
   };
-
   fetchData().catch((error) => {
     console.error(error);
   });
-
-  const renderResults = (searchResult) => {
-    CONTAINER.innerHTML = "";
-    CONTAINER.setAttribute(
-      "class",
-      "drop-shadow-2xl w-full grid grid-cols-1 md:grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-5"
-    );
-   
-    searchResult.forEach((movie) => {
-       if (movie.poster_path) {
-        const movieElement = document.createElement("div");
-        movieElement.classList.add("group", "w-72", "py-2", "hover:scale-105");
-        movieElement.innerHTML = `
-          <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${movie.poster_path}"/>
-          <div class="hidden bg-white/30 backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block">
-            <p>${movie.overview}</p>
-          </div>
-  `;
-        CONTAINER.appendChild(movieElement);
-      }
-      CONTAINER.addEventListener("click", async () => {
-        const movieDetails = await fetchMovie(movie.id);
-        renderMovie(movieDetails);
-    });
-    
-    });
-    
-
-    // CONTAINER.addEventListener("click", (event) => {
-    //   const movieElement = event.target.closest(".group");
-    //   if (movieElement) {
-    //     const index = Array.from(moviesgrid.children).indexOf(movieElement);
-    //     movieDetails(searchResult[index]);
-    //   }
-    // });
-
-
-  };
 }
 
 // Don't touch this function please
@@ -304,13 +270,19 @@ const renderMovie = async (movie) => {
       <div id="hero" class="w-full h-[550px] text-white">
         <div class="w-full h-full">
           <div class='absolute w-full h-[550px] rounded-lg bg-[#000000]/40'></div>
-          <img class="w-full rounded-lg h-full object-cover" src="${BACKDROP_BASE_URL}/${movie.backdrop_path}"/>
+          <img class="w-full rounded-lg h-full object-cover" src="${BACKDROP_BASE_URL}/${
+    movie.backdrop_path
+  }"/>
             <div class="absolute top-[20%] pl-6 p-4 md:p-8 flex items-center gap-8">
               <div class="">
-                <img class="w-64" src="${BACKDROP_BASE_URL}${movie.poster_path}"/>
+                <img class="w-64" src="${BACKDROP_BASE_URL}${
+    movie.poster_path
+  }"/>
               </div>
               <div class="flex flex-col items-start">
-                <h1 class="text-4xl font-bold text-[#22a39f]">${movie.original_title}</h1>
+                <h1 class="text-4xl font-bold text-[#22a39f]">${
+                  movie.original_title
+                }</h1>
                 <div class="flex justify-start"><p>${movie.runtime} minutes</p>
                   <p class="px-8">${movie.vote_average}</p>
                   <p>${movie.genres.map((genre) => genre.name)}</p>
