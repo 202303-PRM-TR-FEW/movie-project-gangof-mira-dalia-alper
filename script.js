@@ -87,6 +87,50 @@ function movieList(subject) {
 function renderAboutPage() {
   CONTAINER.innerHTML = "";
   CONTAINER.setAttribute("class", "container");
+
+  CONTAINER.innerHTML = `
+  <div class="row">
+    <div id="hero" class="w-full h-[550px] text-white">
+      <div class="w-full h-full">
+        <div class='absolute w-full h-[550px] rounded-lg bg-[#000000]/40'></div>
+        <img class="w-full rounded-lg h-full object-cover" src="./assets/poster1.png"/>
+          <div class="absolute top-[20%] pl-6 p-4 md:p-8 flex items-center gap-8">
+            <div class="">
+              <img class="w-64" src="./assets/poster2.png"/>
+            </div>
+            <div class="flex flex-col items-start">
+              <h1 class="text-4xl font-bold text-[#22a39f]">Frontend Warriors</h1>
+              <div class="flex justify-start"><p>92 minutes</p>
+                <p class="px-8">Rating: 10.0</p>
+                <p>Action, Adventure, Sleepless nights</p>
+              </div>
+              <p class="py-8 max-w-xl">Three fearless bootcamp students start a journey to defeat all the bugs in front of them to create the most awesome movie-website.</p>
+              <div class="flex gap-6">
+                <div id="trailer" class="bg-[#22a39f] p-2 rounded-lg"></div>
+                  <h3 class="mt-2"><i>English</i></h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-10 text-white text-4xl"><h1>Actors</h></div>
+        <div id=actors" class=" drop-shadow-2xl grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3">
+          <div class="w-72 py-2 relative z-0 hover:scale-105 ">
+          <img class="rounded-lg" src="./assets/dalia-lg-pic.jpeg"/>
+          <div class=" h-12 w-60 z-10 text-center backdrop-blur-lg bg-white/60 rounded-lg bg-white p-4"><p>Dalia Khalifa</p></div>
+          </div>
+          <div class="w-72 py-2 relative z-0 hover:scale-105 ">
+          <img class="rounded-lg" src="./assets/alper-lg-pic.jpeg"/>
+          <div class=" h-12 w-60 z-10 text-center backdrop-blur-lg bg-white/60 rounded-lg bg-white p-4"><p>Alper Yazagan</p></div>
+          </div>
+          <div class="w-72 py-2 relative z-0 hover:scale-105 ">
+          <img class="rounded-lg" src="./assets/mira-lg-pic.jpeg"/>
+          <div class=" h-12 w-60 z-10 text-center backdrop-blur-lg bg-white/60 rounded-lg bg-white p-4"><p>Mira Amer</p></div>
+          </div>
+        </div>
+  </div>`;
+
+  /*
   CONTAINER.innerHTML = `
     <div class="row">
       <div class="col-md-4">
@@ -118,6 +162,7 @@ function renderAboutPage() {
           <div class=" h-12 w-60 z-10 text-center backdrop-blur-lg bg-white/60 rounded-lg bg-white p-4"><p>Mira Amer</p></div>
           </div>
         </div>;`;
+        */
 }
 
 //Navbar Buttons
