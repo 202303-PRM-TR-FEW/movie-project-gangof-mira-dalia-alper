@@ -106,7 +106,8 @@ function renderAboutPage() {
               </div>
               <p class="py-8 max-w-xl">Three fearless bootcamp students start a journey to defeat all the bugs in front of them to create the most awesome movie-website.</p>
               <div class="flex gap-6">
-                <div id="trailer" class="bg-[#22a39f] p-2 rounded-lg"></div>
+              <div class="border border-solid w-32 p-2 text-black hover:scale-105 rounded-lg bg-white"><a  href="https://www.youtube.com/watch?v=1Rf9-Ej2xPw&t=2s">Watch Trailer</a></div>
+              </div>
                   <h3 class="mt-2"><i>English</i></h3>
                 </div>
               </div>
