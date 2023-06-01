@@ -33,15 +33,15 @@
           <div
             class="dropdown-content group-hover:rounded-lg group-hover:bg-white/30 group-hover:backdrop-blur-lg"
           >
-            <a href="#" onclick="movieList(`popular`)">Popular</a>
-            <a href="#" onclick="sortByDate()">Release Date</a>
-            <a href="#" onclick="movieList(`top_rated`)">Top Rated</a>
-            <a href="#" onclick="movieList(`now_playing`)">Now Playing</a>
-            <a href="#" onclick="movieList(`upcoming`)">Up Coming</a>
+            <a onclick="movieList(`popular`)">Popular</a>
+            <a onclick="sortByDate()">Release Date</a>
+            <a onclick="movieList(`top_rated`)">Top Rated</a>
+            <a onclick="movieList(`now_playing`)">Now Playing</a>
+            <a onclick="movieList(`upcoming`)">Up Coming</a>
           </div>
         </li>
         <li class="pt-1"><a onclick="actorPage()">Actor List</a></li>
-        <li class="pt-1"><a href="#">About</a></li>
+        <li class="pt-1"><a onclick="renderAboutPage()">About</a></li>
         <div
           id="searchForm"
           class="search-container p-1.5 rounded bg-[#434242]"
@@ -59,9 +59,9 @@
       </ul>
     </header>
     <div class="container w-full"></div>
-    <footer class="h-40 w-full bg-[#ECB365] relative">
+    <footer class="h-40 w-full bg-[#434242] relative">
       <div class="footer-content flex flex-col justify-center items-center">
-        <p class="py-2 text-[#064663]">
+        <p class="py-2 text-[#F3EFE0]">
           Done by Mira, Alper and Dalia. You can access our github profiles by
           clicking on the pictures below
         </p>
@@ -69,19 +69,19 @@
           <!-- here we add our links to our github profiles-->
           <a href="https://github.com/bohemianmir" target="_blank"
             ><img
-              class="rounded-full border-8 border-solid border-[#064663]"
+              class="rounded-full border-8 border-solid border-[#F3EFE0]"
               src="./assets/mira-pic.jpeg"
               alt="GitHub"
           /></a>
           <a href="https://github.com/Alperadoss" class="px-24" target="_blank"
             ><img
-              class="rounded-full border-8 border-solid border-[#064663]"
+              class="rounded-full border-8 border-solid border-[#F3EFE0]"
               src="./assets/alper-pic.jpeg"
               alt="GitHub"
           /></a>
           <a href="https://github.com/daliakhalifa02" target="_blank"
             ><img
-              class="rounded-full border-8 border-solid border-[#064663]"
+              class="rounded-full border-8 border-solid border-[#F3EFE0]"
               src="./assets/dalia-pic.jpeg"
               alt="GitHub"
           /></a>

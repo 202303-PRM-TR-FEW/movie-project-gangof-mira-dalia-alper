@@ -11,7 +11,7 @@ let ArrayOfMovies = [];
 function movieByGenre(genreId) {
   let searchResult = [];
   CONTAINER.innerHTML = "";
-  CONTAINER.setAttribute("class","container");
+  CONTAINER.setAttribute("class", "container");
   const searchUrl = `${TMDB_BASE_URL}/discover/movie?api_key=36f366620ade5c54e351a12a48a38a81&with_genres=${genreId}`;
   const fetchData = async () => {
     try {
@@ -44,7 +44,7 @@ function sortByDate() {
 function movieList(subject) {
   let searchResult = [];
   CONTAINER.innerHTML = "";
-  CONTAINER.setAttribute("class","container");
+  CONTAINER.setAttribute("class", "container");
   const fetchData = async () => {
     try {
       const searchUrl = `${TMDB_BASE_URL}/movie/${subject}?api_key=36f366620ade5c54e351a12a48a38a81`;
@@ -63,63 +63,39 @@ function movieList(subject) {
 
 //About Page Frontend Warriors
 function renderAboutPage() {
+  CONTAINER.innerHTML = "";
+  CONTAINER.setAttribute("class", "container");
   CONTAINER.innerHTML = `
     <div class="row">
       <div class="col-md-4">
-        <img id="movie-backdrop" src=${
-          BACKDROP_BASE_URL + movie?.backdrop_path
-        }>
-        <h2 id="movie-title" class="text-4xl m-3 text-center">${
-          movie.title
-        }</h2>
-        <p id="movie-release-date"><b>Release Date:</b> ${
-          movie.release_date
-        }</p>
-        <p id="movie-runtime"><b>Runtime:</b> ${movie.runtime} Minutes</p>
+        <img src="./assets/poster1.png" />
+        <h2 id="movie-title" class="text-4xl m-3 text-center">Frontend Warriors</h2>
+        <p id="movie-release-date"><b>Release Date:</b>01.06.2023</p>
+        <p id="movie-runtime"><b>Runtime:</b>92 Minutes</p>
       </div>
       <div class="col-md-8">
         <h3 class="mt-2"><b>Overview:</b></h3>
-        <p id="movie-overview">${movie.overview}</p>
-        <h3 class="mt-2"><b>Ratings:</b> <i>${movie.vote_average}</i></h3>
-        <h3 class="mt-2"><b>Genre:</b> <i>${movie.genres.map(
-          (genre) => genre.name
-        )}</i></h3>
-        <h3 class="mt-2"><b>Language:</b> <i>${movie.original_language}</i></h3>
-        <h3 class="mt-2"><b>Director:</b> <i id="movie-director"></i></h3>
+        <p id="movie-overview">Three fearless bootcamp students start a journey to defeat all the bugs in front of them to create the most awesome movie-website.</p>
+        <h3 class="mt-2"><b>Ratings:</b> <i>10.0</i></h3>
+        <h3 class="mt-2"><b>Genre:</b> <i>Action, Adventure, Sleepless nights</i></h3>
+        <h3 class="mt-2"><b>Language:</b> <i>English</i></h3>
+        <div class="border border-solid w-32 p-2 text-center hover:scale-105 rounded-lg bg-white"><a  href="https://www.youtube.com/watch?v=1Rf9-Ej2xPw&t=2s">Watch Trailer</a></div>
       </div>
-      <div class="grid place-items-center">
-        <div id="trailer"></div>
-        <h2 class="mt-10 text-white text-xl"><b>Main Actors of the Movie</b></h2>
-        <div id="actors" class="hover:ease-in duration-300 list-unstyled grid grid-cols-3 gap-20"></div>
-        <h2 class="mt-20 mb-2 text-white text-xl"><b>Related Movies:</b></h2>
-        <div id="related-movies" class="list-unstyled grid grid-cols-3 col-md-8 gap-20 hover:ease-in duration-300 "></div>
-      </div>
-    </div>`;
-  CONTAINER.innerHTML = `
-    <div class = "">
-      <h1 class= "text-center mt-10 text-2xl">${actorDetails.name}</h1>
-      <div class = "grid grid-flow-col auto-cols-auto m-10">
-        <div class = "col-md-4">
-          <img src="${PROFILE_BASE_URL}${actorDetails.profilePath}" alt="${
-    actorDetails.name
-  } Profile Picture">
-        </div>
-        <div class="col-md-8 mx-6">
-          <h3><b>Biography:</b></h3>
-          <p>${actorDetails.biography}</p>
-          <h3><b>Birthday:</b>  <i>${actorDetails.birthday}</i></h3>
-          <h3><b>Gender:</b>  <i>${
-            actorDetails.gender === 1 ? "female" : "male"
-          }</i></h3>
-          <h3><b>Popularity:</b>  <i>${actorDetails.popularity}</i></h3>
-        </div>
-      </div>
-      <div class="grid place-items-center">
-        <h3 class="m-5"><b>Actor's movies:</b></h3>
-        <div id="filmography" class="list-unstyled grid grid-cols-3 col-md-8 gap-20"></div>
-      </div>
-    </div>
-  `;
+        <div class="mt-10 text-white text-4xl"><h1>Actors</h></div>
+        <div id=actors" class=" drop-shadow-2xl grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3">
+          <div class="w-72 py-2 relative z-0 hover:scale-105 ">
+          <img class="rounded-lg" src="./assets/dalia-lg-pic.jpeg"/>
+          <div class=" h-12 w-60 z-10 text-center backdrop-blur-lg bg-white/60 rounded-lg bg-white p-4"><p>Dalia Khalifa</p></div>
+          </div>
+          <div class="w-72 py-2 relative z-0 hover:scale-105 ">
+          <img class="rounded-lg" src="./assets/alper-lg-pic.jpeg"/>
+          <div class=" h-12 w-60 z-10 text-center backdrop-blur-lg bg-white/60 rounded-lg bg-white p-4"><p>Alper Yazagan</p></div>
+          </div>
+          <div class="w-72 py-2 relative z-0 hover:scale-105 ">
+          <img class="rounded-lg" src="./assets/mira-lg-pic.jpeg"/>
+          <div class=" h-12 w-60 z-10 text-center backdrop-blur-lg bg-white/60 rounded-lg bg-white p-4"><p>Mira Amer</p></div>
+          </div>
+        </div>;`;
 }
 
 //Navbar Buttons
@@ -198,23 +174,25 @@ function search() {
       "class",
       "drop-shadow-2xl w-full grid grid-cols-1 md:grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-5"
     );
-
+   
     searchResult.forEach((movie) => {
-      if (movie.poster_path) {
+      let moviePoster = movie.poster_path;
+      // if (moviePoster) {
         const movieElement = document.createElement("div");
         movieElement.classList.add("group", "w-72", "py-2", "hover:scale-105");
         movieElement.innerHTML = `
-          <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${movie.poster_path}"/>
+          <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${moviePoster}"/>
           <div class="hidden bg-white/30 backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block">
             <p>${movie.overview}</p>
           </div>
   `;
         CONTAINER.appendChild(movieElement);
-      }
-      CONTAINER.addEventListener("click", async () => {
+      // }
+      moviePoster.addEventListener("click", async () => {
         const movieDetails = await fetchMovie(movie.id);
         renderMovie(movieDetails);
     });
+    
     });
     
 
@@ -225,6 +203,8 @@ function search() {
     //     movieDetails(searchResult[index]);
     //   }
     // });
+
+
   };
 }
 
@@ -313,44 +293,47 @@ const renderMovies = (movies) => {
   //       <p>${movie.overview}</p>`
   //   }
   // });
-}
+};
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovie = async (movie) => {
+  CONTAINER.innerHTML = "";
+  CONTAINER.setAttribute("class", "container");
   console.log(movie);
   // CONTAINER.innerHtml = "";
   CONTAINER.innerHTML = `
     <div class="row">
-      <div class="col-md-4">
-        <img id="movie-backdrop" src=${
-          BACKDROP_BASE_URL + movie?.backdrop_path
-        }>
-        <h2 id="movie-title" class="text-4xl m-3 text-center">${
-          movie.title
-        }</h2>
-        <p id="movie-release-date"><b>Release Date:</b> ${
-          movie.release_date
-        }</p>
-        <p id="movie-runtime"><b>Runtime:</b> ${movie.runtime} Minutes</p>
-      </div>
-      <div class="col-md-8">
-        <h3 class="mt-2"><b>Overview:</b></h3>
-        <p id="movie-overview">${movie.overview}</p>
-        <h3 class="mt-2"><b>Ratings:</b> <i>${movie.vote_average}</i></h3>
-        <h3 class="mt-2"><b>Genre:</b> <i>${movie.genres.map(
-          (genre) => genre.name
-        )}</i></h3>
-        <h3 class="mt-2"><b>Language:</b> <i>${movie.original_language}</i></h3>
-        <h3 class="mt-2"><b>Director:</b> <i id="movie-director"></i></h3>
-      </div>
-      <div class="grid place-items-center">
-        <div id="trailer"></div>
-        <h2 class="mt-10 text-white text-xl"><b>Main Actors of the Movie</b></h2>
-        <div id="actors" class="hover:ease-in duration-300 list-unstyled grid grid-cols-3 gap-20"></div>
-        <h2 class="mt-20 mb-2 text-white text-xl"><b>Related Movies:</b></h2>
-        <div id="related-movies" class="list-unstyled grid grid-cols-3 col-md-8 gap-20 hover:ease-in duration-300 "></div>
+      <div id="hero" class="w-full h-[550px] text-white">
+        <div class="w-full h-full">
+          <div class='absolute w-96 h-[550px] rounded-lg bg-gradient-to-r from-black'></div>
+            <img class="w-full rounded-lg h-full object-cover" src="${BACKDROP_BASE_URL}/${movie.backdrop_path}"/>
+            <div class="absolute top-[20%] pl-6 p-4 md:p-8 flex items-center gap-8">
+              <div class="">
+                <img class="w-64" src="${BACKDROP_BASE_URL}${movie.poster_path}"/>
+              </div>
+              <div class="flex flex-col items-start">
+                <h1 class="text-4xl font-bold text-[#22a39f]">${movie.original_title}</h1>
+                <div class="flex justify-start"><p>${movie.runtime} minutes</p>
+                  <p class="px-8">${movie.vote_average}</p>
+                  <p>${movie.genres.map((genre) => genre.name)}</p>
+                </div>
+                <p class="py-8 max-w-xl">${movie.overview}</p>
+                <div class="flex gap-6">
+                  <div id="trailer" class="bg-[#22a39f] p-4 rounded-lg"></div>
+                    <h3 class="mt-2"><i>${movie.original_language}</i></h3>
+                    <h3 class="mt-2 text-[#22a39f]">Director: <i id="movie-director"></i></h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid place-items-center">
+            <h2 class="mt-10 text-[#22a39f] text-xl"><b>Main Actors of the Movie</b></h2>
+            <div id="actors" class="hover:ease-in duration-300 list-unstyled grid grid-cols-3 gap-20"></div>
+              <h2 class="mt-20 mb-2 text-[#22a39f] text-xl"><b>Related Movies:</b></h2>
+            <div id="related-movies" class="list-unstyled grid grid-cols-3 col-md-8 gap-20 hover:ease-in duration-300 "></div>
       </div>
     </div>`;
-    
+
   const companyLogos = await fetchCompanyLogos(movie.production_companies);
   renderCompanyLogos(companyLogos);
 
@@ -402,18 +385,18 @@ const renderMovie = async (movie) => {
       relatedMovieImage.src = BACKDROP_BASE_URL + relatedMovie.poster_path;
       relatedMovieItem.appendChild(relatedMovieImage);
       relatedMoviesList.appendChild(relatedMovieItem);
-      
-        // if (relatedMovie.poster_path) {
-        //   const movieElement = document.createElement("div");
-        //   movieElement.classList.add("group", "w-72", "py-2", "hover:scale-105");
-        //   movieElement.innerHTML = `
-        //   <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${relatedMovie.poster_path}"/>
-        //   <div class="hidden bg-white/30 backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block">
-        //     <p>${relatedMovie.overview}</p>
-        //   </div>`
-        //   CONTAINER.appendChild(movieElement);
-        // }
-      
+
+      // if (relatedMovie.poster_path) {
+      //   const movieElement = document.createElement("div");
+      //   movieElement.classList.add("group", "w-72", "py-2", "hover:scale-105");
+      //   movieElement.innerHTML = `
+      //     <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${relatedMovie.poster_path}"/>
+      //     <div class="hidden bg-white/30 backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block">
+      //       <p>${relatedMovie.overview}</p>
+      //     </div>`;
+      //   CONTAINER.appendChild(movieElement);
+      // }
+
       relatedMovieItem.addEventListener("click", async () => {
         const relatedMovieDetails = await fetchMovie(relatedMovie.id);
         renderMovie(relatedMovieDetails);
@@ -422,7 +405,7 @@ const renderMovie = async (movie) => {
   } catch (error) {
     console.error("Error retrieving related movies:", error);
   }
-  
+
   try {
     const castResponse = await fetch(castUrl);
     const castData = await castResponse.json();

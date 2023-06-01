@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: rgb(4, 28, 50);
+  background-color: rgb(34, 34, 34);
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -25,23 +25,13 @@ body {
 }
 
 /* Dalia's CSS */
-h3,
-h2 {
-  color: #ecb365;
-}
-
-#movie-release-date,
-#movie-runtime {
-  color: #064663;
-}
-
 i {
   color: whitesmoke;
   font-style: normal;
 }
 
 h1 {
-  color: #ecb365;
+  color: white;
   text-align: center;
 }
 
@@ -63,17 +53,11 @@ li,
   cursor: pointer;
 }
 
-#trailer {
-  background-color: #ecb365;
-  padding: 10px;
-  border-radius: 10px;
-}
-
 #filmography {
   margin: 0 50px 30px 50px;
 }
 
-input::placeholder{
+input::placeholder {
   color: grey;
 }
 
@@ -103,6 +87,6 @@ main:hover {
   display: block;
 }
 
-.navbar>li:hover{
-  color: #22A39F;
+.navbar > li:hover {
+  color: #22a39f;
 }
