@@ -7,6 +7,28 @@ const CONTAINER = document.querySelector(".container");
 const homebtn = document.querySelector("#homebtn");
 let ArrayOfMovies = [];
 
+const genres = {
+  28: "Action",
+  12: "Adventure",
+  16: "Animation",
+  35: "Comedy",
+  80: "Crime",
+  99: "Documentary",
+  18: "Drama",
+  10751: "Family",
+  14: "Fantasy",
+  36: "History",
+  27: "Horror",
+  10402: "Music",
+  9648: "Mystery",
+  10749: "Romance",
+  878: "Sci-Fi",
+  10770: "TV Movie",
+  53: "Thriller",
+  10752: "War",
+  37: "Western",
+};
+
 //Movies by Genre
 function movieByGenre(genreId) {
   let searchResult = [];
@@ -163,7 +185,7 @@ function search() {
       searchResult = searchObj.results;
       searchResult = searchResult.filter((item) => item.poster_path);
       console.log(searchResult);
-      renderMovies(searchResult); // Call renderResults inside fetchData
+      renderMovies(searchResult); // Call renderMovies inside fetchData
     } catch (error) {
       console.error(error);
     }
@@ -230,12 +252,17 @@ const renderMovies = (movies) => {
 
   const moviesgrid = document.getElementById("moviesgrid");
   movies.forEach((movie) => {
+    console.log(movie);
     const movieElement = document.createElement("div");
     movieElement.classList.add("group", "w-72", "py-2", "hover:scale-105");
     movieElement.innerHTML = `
-    <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${movie.poster_path}"/>
+    <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${
+      movie.poster_path
+    }"/>
     <div class="hidden bg-white/30 h-full backdrop-blur-lg absolute rounded-lg top-0 left-0 bg-white p-4 shadow-md group-hover:block">
-      <p>${movie.overview}</p>
+      <p>${movie.overview}</p><br/>
+      <p>${movie.genre_ids.map((genre) => genres[genre])}</p>
+      <p>Rating:${movie.vote_average}</p>
     </div>
   `;
     moviesgrid.appendChild(movieElement);
@@ -460,6 +487,7 @@ const renderFilmographyData = async (actorId) => {
     const movies = movieCredits.cast.slice(0, 6);
     movies.forEach((movie) => {
       const filmographyItem = document.createElement("li");
+      filmographyItem.setAttribute("class", "hover:scale-105");
       const filmographyImage = document.createElement("img");
       if (movie.poster_path) {
         filmographyImage.src = BACKDROP_BASE_URL + movie.poster_path;
