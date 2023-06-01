@@ -69,16 +69,16 @@ function renderAboutPage() {
     <div class="row">
       <div class="col-md-4">
         <img src="./assets/poster1.png" />
-        <h2 id="movie-title" class="text-4xl m-3 text-center">Frontend Warriors</h2>
-        <p id="movie-release-date"><b>Release Date:</b>01.06.2023</p>
-        <p id="movie-runtime"><b>Runtime:</b>92 Minutes</p>
+        <h2 id="movie-title" class="text-4xl m-3 text-center text-[#22A39F]">Frontend Warriors</h2>
+        <p id="movie-release-date" class="text-[#22A39F]"><b>Release Date:</b><i>01.06.2023</i></p>
+        <p id="movie-runtime" class="text-[#22A39F]"><b>Runtime:</b><i>92 Minutes</i></p>
       </div>
       <div class="col-md-8">
-        <h3 class="mt-2"><b>Overview:</b></h3>
-        <p id="movie-overview">Three fearless bootcamp students start a journey to defeat all the bugs in front of them to create the most awesome movie-website.</p>
-        <h3 class="mt-2"><b>Ratings:</b> <i>10.0</i></h3>
-        <h3 class="mt-2"><b>Genre:</b> <i>Action, Adventure, Sleepless nights</i></h3>
-        <h3 class="mt-2"><b>Language:</b> <i>English</i></h3>
+        <h3 class="mt-2 text-[#22A39F]"><b>Overview:</b></h3>
+        <i id="movie-overview">Three fearless bootcamp students start a journey to defeat all the bugs in front of them to create the most awesome movie-website.</i>
+        <h3 class="mt-2 text-[#22A39F]"><b>Ratings:</b> <i>10.0</i></h3>
+        <h3 class="mt-2 text-[#22A39F]"><b>Genre:</b> <i>Action, Adventure, Sleepless nights</i></h3>
+        <h3 class="mt-2 text-[#22A39F]"><b>Language:</b> <i>English</i></h3>
         <div class="border border-solid w-32 p-2 text-center hover:scale-105 rounded-lg bg-white"><a  href="https://www.youtube.com/watch?v=1Rf9-Ej2xPw&t=2s">Watch Trailer</a></div>
       </div>
         <div class="mt-10 text-white text-4xl"><h1>Actors</h></div>
@@ -248,16 +248,6 @@ const renderMovies = (movies) => {
       movieDetails(movies[index]);
     }
   });
-  // searchResult.forEach((movie) => {
-  //   if (movie.poster_path) {
-  //     const movieElement = document.createElement("div");
-  //     movieElement.classList.add("group", "w-72", "py-2", "hover:scale-105");
-  //     movieElement.innerHTML = `
-  //     <img class="rounded-lg hover:cursor-pointer" src="${BACKDROP_BASE_URL}${movie.poster_path}"/>
-  //     <div class="hidden bg-white/30 backdrop-blur-lg absolute rounded-lg top-full left-0 bg-white p-4 shadow-md group-hover:block">
-  //       <p>${movie.overview}</p>`
-  //   }
-  // });
 };
 // You'll need to play with this function in order to add features and enhance the style.
 const renderMovie = async (movie) => {
@@ -444,13 +434,17 @@ const fetchAndRenderActorData = async (actorId) => {
       } Profile Picture">
             </div>
             <div class="col-md-8 mx-6">
-              <h3><b>Biography:</b></h3>
-              <p>${actorDetails.biography}</p>
-              <h3><b>Birthday:</b>  <i>${actorDetails.birthday}</i></h3>
-              <h3><b>Gender:</b>  <i>${
+              <h3 class="text-[#22A39F]"><b>Biography:</b></h3>
+              <i class="#F3EFE0">${actorDetails.biography}</i>
+              <h3 class="text-[#22A39F]"><b>Birthday:</b>  <i>${
+                actorDetails.birthday
+              }</i></h3>
+              <h3 class="text-[#22A39F]"><b>Gender:</b>  <i class="#F3EFE0">${
                 actorDetails.gender === 1 ? "female" : "male"
               }</i></h3>
-              <h3><b>Popularity:</b>  <i>${actorDetails.popularity}</i></h3>
+              <h3 class="text-[#22A39F]"><b>Popularity:</b>  <i>${
+                actorDetails.popularity
+              }</i></h3>
             </div>
           </div>
           <div class="grid place-items-center">
